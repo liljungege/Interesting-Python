@@ -41,7 +41,7 @@ def check_events(ai_settings, screen, ship, bullets):
 
 def check_fleet_edges(ai_settings, aliens):
     """ 有外星人到达边缘是采取相应的措施 """
-    for alien in aliens.spraaites():
+    for alien in aliens.sprites():
         if alien.check_edges():
             change_fleet_direction(ai_settings, aliens)
             break
