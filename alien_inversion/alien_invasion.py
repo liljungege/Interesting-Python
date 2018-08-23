@@ -11,22 +11,22 @@ def run_game():
     # 创建一个宽1000像素、高600像素的游戏窗口
     screen = pygame.display.set_mode((ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Alien Invasion")
+
+    # 创建一艘飞船、一个子弹编组和一个外星人编组
     ship = Ship(ai_settings, screen)
     bullets = Group()
+    aliens = Group()
+
+    # 创建外星人群
+    gf.create_fleet(ai_settings, screen, aliens, ship)
 
     # 游戏主循环
     while True:
 
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
-        bullets.update()
+        gf.update_bullets(bullets)
 
-        # 删除已消失的子弹
-        for bullet in bullets.copy():
-            if bullet.rect.bottom <= 0:
-                bullets.remove(bullet)
-        # print(len(bullets))
-
-        gf.update_screen(ai_settings, screen, ship, bullets)
+        gf.update_screen(ai_settings, screen, ship, aliens, bullets)
 
 run_game()
